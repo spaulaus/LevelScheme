@@ -1,0 +1,424 @@
+%!PS-Adobe-2.0 EPSF-1.2
+%%BoundingBox: 0 0 650 700
+%This PostScript file produces the partial level scheme for 73Zn.
+%Written: Unknown - Date: Unknown (someone knowing German by the comments).
+%Heavy procedure and layout modifications by S.V. Paulauskas - December 2011
+%Landscape Mode updated by N.T. Brewer - January 2012
+
+%--------------------------------------------------------
+%   BEGIN PROCEDURE LIST
+%--------------------------------------------------------
+%Set the information for the fonts. 
+/fontsize 13.0 def 
+/fontsize2 1.5 def 
+/fontsize3 18.0 def
+/Efont /Times findfont fontsize scalefont def  % for energies
+/Efont2 /Times findfont 1.5 scalefont def
+/Efont3 /Times findfont fontsize3 scalefont def
+/Ifont /Times findfont fontsize scalefont def  % for intensities
+/Ifont2 /Times findfont 8.0 scalefont def  % for log ft etc.
+
+/escale {5 div} def  %%% definition of energy scale
+		     %%% achtung!: it is a dividing factor
+		     %%% achtung!: modify when ploting landscape
+/xscale {0.925 mul} def  %%% this will give a wider plot
+/cm {28.34646 mul} def %Defines the conversion from ps units to cm.
+
+% x and y coordinates of starting point for levels:
+4.3 cm 3 cm translate
+
+5 setmiterlimit  % avoid spikes on end of narrow arrows
+/halffs {fontsize 2 div} def %Changes position of the "-" in the decay superscript
+/nhalffs {fontsize -2.7 div} def %Changes position of "n" on S_n
+/fullfs {fontsize 1 div} def %unused
+/qfs {fontsize 4 div } def %Seems to change position of the labels.
+
+% Some interesting features to be modified:
+/MaxY 0 cm  def    % Y position of the top of the last energy label
+/Mama -0.7 cm def % horizontal length of the mother level
+/LevelEnd 17.5 cm def   %horizontal length of the level
+			%this+translation shouldn't exceed 21 cm
+/LevelStart 25 xscale def
+% Also important: position of first arrow starting from the right side:
+/ArrowX 100 xscale def       % horiz. position of arrow; initial value
+/ArrowDist 20.0 xscale def  % horiz. distance between arrows
+
+%Landscape subroutine to help ease the transition into landscape mode
+%Written N.T. Brewer
+/landscape {
+   90 rotate
+   2 cm -15 cm translate
+   1 0.9 scale
+   /LevelEnd 25.0 cm def
+   /textpos {1.74 mul} def % adjusts text labels of daughter and E[keV]
+   /ArrowDist 25.0 xscale def  %horiz. distance between arrows
+} def
+
+%Uncomment the following line to enable printing in landscape as defined
+%in the above routine.
+%landscape
+
+%********** supsub **********
+%Show superscripts, subscripts, a and z for nuclei
+/scriptdict 20 dict def
+/supsub { scriptdict begin
+   /ary exch def
+   /element ary 0 get def
+   /a ary 1 get def
+   /z ary 2 get def
+   /sub ary 3 get def
+   /sup ary 4 get def
+   /ft exch def
+   /fs exch def
+   /ypos exch def
+   /xpos exch def
+   
+   ft findfont fs scalefont setfont
+   /width element stringwidth pop def
+   xpos ypos moveto element show
+   ft findfont fs 0.58 mul  scalefont setfont 
+   xpos width add ypos 0.5 fs mul add moveto sup show	
+   xpos width add ypos 0.2554 neg fs mul add moveto sub show
+   /leftsup a stringwidth pop def
+   /leftsub z stringwidth pop def
+   ft findfont fs 0.58 mul scalefont setfont 
+   xpos leftsup neg add ypos 0.5 fs mul add moveto a show
+   xpos leftsub neg add ypos 0.2554 neg fs mul add moveto z show
+   end
+} def
+
+%********** upshw **********
+% version of show that superscripts + and - (for parities),
+%  and subscripts for n (neutron separation energy)
+/upshw {
+    /stmp exch def stmp {
+	/t1 exch def
+	(X) /strg exch def
+	strg 0 t1 put
+	t1 43 eq {1 halffs rmoveto strg show 1 halffs neg rmoveto} if
+	t1 177 eq {1 halffs rmoveto strg show 1 halffs neg rmoveto} if
+	t1 110 eq {1 nhalffs rmoveto strg show 1 nhalffs neg rmoveto} if
+	t1 177 ne t1 43 ne and t1 110 ne and {strg show} if
+    } forall stmp pop
+} def
+
+%********** arrow **********
+/arrowdict 13 dict def
+/arrow { arrowdict begin
+   /ary exch def
+   /dash ary 0 get def
+   /color ary 1 get def
+   /coinType ary 2 get def
+
+   /headlength exch def
+   /halfheadthickness exch 2 div def
+   /halfthickness exch 2 div def
+   /tipy exch def /tipx exch def
+   /taily exch def /tailx exch def
+   /dx tipx tailx sub def
+   /dy tipy taily sub def
+   /arrowlength dx dx mul dy dy mul add sqrt def
+   /angle dy dx atan def
+   /base arrowlength headlength sub def
+   /savematrix matrix currentmatrix def
+   tailx taily translate
+   angle rotate
+
+   color 1 eq {1. 0. 0. setrgbcolor fill} if
+   color 2 eq {0. 1. 0. setrgbcolor fill} if
+   color 3 eq {0. 0. 1. setrgbcolor fill} if
+   
+   dash 0 gt
+   {[10 6] 0 setdash
+      0.4 setlinewidth
+      0 0 moveto
+      base 0 lineto stroke
+      base 0 moveto
+      base halfheadthickness neg lineto
+      arrowlength 0 lineto
+      base halfheadthickness lineto
+      base 0 lineto
+      [] 0 setdash
+      0.5 setlinewidth fill}
+   {0 halfthickness neg moveto
+      base halfthickness neg lineto
+      base halfheadthickness neg lineto
+      arrowlength 0 lineto
+      base halfheadthickness lineto
+      base halfthickness lineto
+      0 halfthickness lineto } ifelse
+   closepath
+   savematrix setmatrix
+      
+   coinType (up)   eq {tailx taily 0.11 cm 0 360 arc fill} if
+   coinType (down) eq {tipx tipy 0.11 cm 0 360 arc fill} if
+   coinType (both) eq {tipx tipy 0.11 cm 0 360 arc fill  
+                       tailx taily 0.11 cm 0 360 arc fill} if
+   end
+} def
+
+%********** trans **********
+/trans {
+   newpath
+   /ary exch def
+   /Intensity exch def
+   escale /Eto exch def
+   escale /Efrom exch def
+   /Xfrom ArrowX def
+   /Xto ArrowX def
+
+   Efrom Xfrom Eto Xto
+   Intensity intensity dup ht add headl
+
+   ary arrow
+   0 setgray fill
+
+   %Set the labels for the transition
+   % label = put transition label in white box above the transition
+   % transition arrows are horizontal ! Label is to the right
+   % Print energy
+   Efont setfont
+   dup /Estring exch def stringwidth pop /elablen exch def
+   % new currentpoint to the right of arrow:
+   Efrom Xfrom moveto
+   currentpoint                 % save it on the stack
+   Estring () ne {1 fontsize 100 div Estring rgb} if % white box for label
+   moveto  % (saved point)
+   Estring rs                  % show string centred
+   %Print intensity
+   Ifont setfont
+   /Istring exch def
+   % new currentpoint
+   Efrom Xfrom moveto
+   elablen 0 rmoveto
+   currentpoint                 % save it on the stack
+   Istring () ne {1 fontsize 7 div Istring rgb} if % white box for label
+   moveto  % (saved point)
+   Istring rs                  % show string centred
+   
+   ArrowX ArrowDist add /ArrowX exch def
+} def
+
+%********** level **********
+/level {
+   newpath
+   /isMother exch def
+   0 gt { [12 6] 0 setdash 0.3 setlinewidth} if   % dashed line if dash gt 0
+   /down exch def            % downkick in units of dy
+   escale /Elevel exch def   % straight line if down=0 and if possible
+   LevelStart Elevel moveto
+   isMother 0 eq {
+      LevelEnd dx1 sub dx2 sub Elevel lineto
+   } {
+      Mama dx1 sub dx2 sub Elevel lineto
+   } ifelse
+   Elevel MaxY ge {
+      Elevel dy down mul sub
+      MaxY lt { MaxY Elevel sub } { dy down mul neg } ifelse
+      /dE exch def } {
+      % broken level
+      MaxY Elevel sub /dE exch def
+   } ifelse
+
+   isMother 0 eq {
+      dx1 dE rlineto
+      dx2 0 rlineto
+   } { 100 0 rlineto } ifelse
+   
+   stroke
+   Elevel dE add
+   /Elevel exch def
+   Elevel dy add
+   /MaxY exch def
+   dup stringwidth pop neg LevelEnd add Elevel moveto
+
+   %Set the labels for the levels
+   0 qfs rmoveto
+   /Energy exch def
+   /feed exch def
+   /ft exch def
+   Efont setfont Energy show
+   -17.1 cm 0 rmoveto
+   Ifont setfont ft getnum upshw
+   14.8 cm 0 rmoveto feed %upshw
+   Ifont setfont feed getnum upshw
+
+   0.5 setlinewidth
+   [] 0 setdash
+} def 
+
+%********** getnum **********
+% convert hyphens (-) in argument string to minus signs
+/getnum {
+    /temp exch def /count 0 def temp
+    {/t1 exch def
+    t1 45 eq {/t1 177 def} if
+    temp count t1 put count 1 add /count exch def
+    } forall temp
+} def
+
+/rs { % string = string to the right of the current point (centered in y)
+    dup
+    gsave currentpoint translate
+    newpath 0 0 moveto
+    true charpath pathbbox  0 0 moveto
+    0
+    3 index 2 index add 2 div neg
+    rmoveto
+    pop pop pop pop
+    currentpoint transform grestore itransform moveto
+    show
+} def
+
+/expand{
+    % d llx lly ulx uly =} llx-d lly-d ulx+d uly+d
+    4 -1 roll 4 index sub
+    4 -1 roll 4 index sub
+    4 -1 roll 4 index add
+    4 -1 roll 4 index add
+    5 -1 roll pop
+} def
+
+/outline {
+    % llx lly ulx uly = add this rectangle to the path
+    3 index 3 index moveto
+    1 index 3 index lineto
+    1 index 1 index lineto
+    3 index 1 index lineto
+    closepath pop pop pop pop
+} def
+
+/rgb{
+    % g d string = paint grey (g) box d units bigger than bounding
+    % box of string, centred at y to the right of the current point
+    dup
+    gsave currentpoint translate
+    newpath 0 0 moveto
+    true charpath pathbbox  0 0 moveto
+    0
+    3 index 2 index add 2 div neg
+    rmoveto
+    pop pop pop pop
+    currentpoint transform grestore itransform moveto
+    gsave true charpath pathbbox
+    expand outline
+    setgray fill grestore
+} def
+
+%-----------------------------------
+% BEGIN MAIN BODY OF COMMANDS
+%-----------------------------------
+%% Mother nucleus description and Q value
+/momXPos -2.0 cm def
+/momYPos 17.75 cm def
+momXPos momYPos 30 /Times-Bold [(Cu) (73) (29) (44) (59)] supsub
+
+% Daughter Nucleus Information
+7 cm -1.5 cm 30 /Times-Bold [(Zn) (73) (30) (43) (123)] supsub
+
+-2.0 cm 19.2 cm 18 /Symbol [(3/2) ( ) ( ) ( ) (-)] supsub
+%/Times findfont 18 scalefont setfont
+%-2.5 cm -1 cm moveto (I  %) show %Put the I_beta label
+%/Symbol findfont 13 scalefont setfont
+%-2.5 cm -1 cm moveto 5 -3 rmoveto (b) show %Put the beta in the I_beta label
+%/Times findfont 18 scalefont setfont
+%-0.8 cm -1 cm moveto (log) show %Put the log for log(ft)
+%/Times-Italic findfont 15 scalefont setfont
+%0.2 cm -1 cm moveto (ft) show %Put the ft for log(ft)
+/Times findfont 18 scalefont setfont
+16.2 cm -1 cm moveto (E [keV]) show
+%/Times findfont 18 scalefont setfont
+%1. cm 15.5 cm  moveto (P = 12(4)%) show %Beta-delayed neutron probability
+%/Times findfont 14 scalefont setfont
+%1 cm 15.5 cm moveto 8 -4 rmoveto (n) show %Set n for P_n
+
+%Beta symbol for decay arrow:
+1.0 cm momYPos 20 /Symbol [(b) () () () (-)] supsub
+
+%Set the Q-value information
+/Times findfont 20 scalefont setfont
+5 cm momYPos moveto (Q  = 6607(4) keV) show
+/Symbol findfont 14 scalefont setfont 
+5 cm momYPos moveto 14 5 neg rmoveto (b) show
+
+%Set the half-life information
+/Times findfont 20 scalefont setfont
+12.0 cm momYPos moveto (T    = 4.2(3) s) show
+/Times findfont 14 scalefont setfont
+12.0 cm momYPos moveto 10 3 neg rmoveto (1/2) show
+
+%Insert the decay arrorw.
+%newpath 
+-0.05 cm 18.7 cm 1.2 cm 16.8 cm 1.4 7 7 [0 0 0] arrow fill
+
+Efont3 setfont
+LevelEnd 0 moveto
+
+Efont3  setfont  %font for level labels
+LevelEnd 0 moveto
+Efont setfont
+
+%gsave
+  newpath 0 0 moveto
+  (8888.8) stringwidth pop /dx2 exch def    % energy label width
+  dx2 3 div /dx1 exch def
+%grestore
+
+%gsave
+  newpath 0 0 moveto
+  (88888.8) true charpath pathbbox
+  2 index sub qfs 2 mul add /dy exch def    % Y distance between energy labels
+  pop pop pop
+%grestore
+
+
+/headl 0.20 cm def         % length of arrowhead
+/ht 5. def                 % ht is thickness of arrowhead at its widest part/
+			   % thickness of tail.
+/intensity {0.08 mul} def  % intensity scales the width of the arrow.
+
+%-----------------------------------------------------------------------------
+% LEVELS:
+%-----------------------------------------------------------------------------
+%Spin Dunno? Label  Position Dunno? isDashed isMother
+%(52(7)      5.5)  (5/2- )  (   0  )     0  0  0  0 level
+() () (0.0)    0.0    0 0 0 level
+() () (195.5)  195.5  0 0 0 level
+() () (237.6)  237.6  0 1 0 level
+() () (307.2)  307.2  0 0 0 level
+() () (449.6)  449.6  0 0 0 level
+() () (502.2)  502.2  0 0 0 level
+() () (1124.0) 1124.0 0 0 0 level
+() () (2008.9) 2008.9 0 0 0 level
+
+2 setlinewidth  % for ground state only
+/LevelStart -100 xscale def
+() (  ) ( ) 2570 0 0 1 level
+
+%Example transition : (10) (218) 314 96 18 [0 0 (none)] trans
+% Intensity label                = 10
+% Energy label                   = 218
+% Efrom                          = 314 Y of tail of arrow
+% Eto                            =  96 Y of tip of arrow
+% Intensity                      =  18 defines width of arrow
+% [a b c]                        =  a > 1 for dashed arror
+%				 =  b = 1(=red), 2(=green), 3(=blue)
+%				 = coincidence information (up),(down),(both),(none)
+
+% see trans for definition of real arrow width in terms of Intensity
+% headl = length of arrowhead is a global parameter
+
+%--------------------------------------------------------------------
+% TRANSITIONS:
+%-----------------------------------------------------------------------------
+LevelEnd 0 translate
+90 rotate               %% Now arrows and labels are plotted horizontally !
+%-----------------------------------------------------------------------------
+() (  195.5)  195.5  0.0   1   [0 0 (none)] trans
+() (  42.1)   237.6  195.5 1   [1 0 (none)] trans   
+() (  307.2)  307.2  0.0   5.6 [0 0 (none)] trans
+() (  449.6)  449.6  0.0   100 [0 0 (up)] trans 
+() (  502.2)  502.2  0.0   17  [0 0 (none)] trans
+() (  674.4)  1124.0 449.2 7   [0 0 (down)] trans
+() (  1559.3) 2008.9 449.2 2   [0 0 (down)] trans
+%-----------------------------------------------------------------------------

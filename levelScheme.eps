@@ -36,7 +36,7 @@
 % Some interesting features to be modified:
 /MaxY 0 cm  def    % Y position of the daughter ground state
 /Mama -0.7 cm def % horizontal position of the mother level
-/LevelEnd 15 cm def   %horizontal length of the level
+/LevelEnd 12 cm def   %horizontal length of the level
 		      %this+translation shouldn't exceed 21 cm
 /LevelStart 25 xscale def
 % Also important: position of first arrow starting from the right side:
@@ -309,16 +309,20 @@
 % BEGIN MAIN BODY OF COMMANDS
 %-----------------------------------
 %% Mother nucleus description and Q value
-/momXPos -2.0 cm def
+/momXPos -1.0 cm Mama add def
 /momYPos 17.75 cm def
 momXPos momYPos 30 /Times-Bold [(Cu) (73) () () ()] supsub
 
-% Daughter Nucleus Information
-7 cm -1.5 cm 30 /Times-Bold [(Zn) (73) () () ()] supsub
-
+% Put on the label for the spin of the mother
 momXPos momYPos 1.3 cm add 18 /Symbol [(3/2) ( ) ( ) ( ) (-)] supsub
 /Times findfont 18 scalefont setfont
-13.2 cm -1 cm moveto (E [keV]) show
+
+% Daughter Nucleus Information
+/dauXPos 7 cm def
+/dauYPos -1.5 cm def
+dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
+
+-2 cm LevelEnd add dauYPos 0.25 cm add moveto (E [keV]) show
 
 %/Times findfont 18 scalefont setfont
 %-2.5 cm -1 cm moveto (I  %) show %Put the I_beta label

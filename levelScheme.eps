@@ -21,11 +21,11 @@
 /escale {5 div} def  %%% definition of energy scale
 		     %%% achtung!: it is a dividing factor
 		     %%% achtung!: modify when ploting landscape
-/xscale {0.925 mul} def  %%% this will give a wider plot
+/xscale {0.75 mul} def  %%% this will give a wider plot
 /cm {28.34646 mul} def %Defines the conversion from ps units to cm.
 
 % x and y coordinates of starting point for levels:
-4.3 cm 3 cm translate
+3.3 cm 3 cm translate
 
 5 setmiterlimit  % avoid spikes on end of narrow arrows
 /halffs {fontsize 2 div} def %Changes position of the "-" in the decay superscript
@@ -36,7 +36,7 @@
 % Some interesting features to be modified:
 /MaxY 0 cm  def    % Y position of the top of the last energy label
 /Mama -0.7 cm def % horizontal length of the mother level
-/LevelEnd 17.5 cm def   %horizontal length of the level
+/LevelEnd 13 cm def   %horizontal length of the level
 			%this+translation shouldn't exceed 21 cm
 /LevelStart 25 xscale def
 % Also important: position of first arrow starting from the right side:
@@ -245,7 +245,7 @@
 
    0.5 setlinewidth
    [] 0 setdash
-} def 
+} def
 
 %********** getnum **********
 % convert hyphens (-) in argument string to minus signs
@@ -311,10 +311,10 @@
 %% Mother nucleus description and Q value
 /momXPos -2.0 cm def
 /momYPos 17.75 cm def
-momXPos momYPos 30 /Times-Bold [(Cu) (73) (29) (44) (59)] supsub
+momXPos momYPos 30 /Times-Bold [(Cu) (73) () () ()] supsub
 
 % Daughter Nucleus Information
-7 cm -1.5 cm 30 /Times-Bold [(Zn) (73) (30) (43) (123)] supsub
+7 cm -1.5 cm 30 /Times-Bold [(Zn) (73) () () ()] supsub
 
 -2.0 cm 19.2 cm 18 /Symbol [(3/2) ( ) ( ) ( ) (-)] supsub
 %/Times findfont 18 scalefont setfont
@@ -326,7 +326,7 @@ momXPos momYPos 30 /Times-Bold [(Cu) (73) (29) (44) (59)] supsub
 %/Times-Italic findfont 15 scalefont setfont
 %0.2 cm -1 cm moveto (ft) show %Put the ft for log(ft)
 /Times findfont 18 scalefont setfont
-16.2 cm -1 cm moveto (E [keV]) show
+13.2 cm -1 cm moveto (E [keV]) show
 %/Times findfont 18 scalefont setfont
 %1. cm 15.5 cm  moveto (P = 12(4)%) show %Beta-delayed neutron probability
 %/Times findfont 14 scalefont setfont
@@ -393,7 +393,7 @@ Efont setfont
 
 2 setlinewidth  % for ground state only
 /LevelStart -100 xscale def
-() (  ) ( ) 2570 0 0 1 level
+() (  ) ( ) 2675 0 0 1 level
 
 %Example transition : (10) (218) 314 96 18 [0 0 (none)] trans
 % Intensity label                = 10

@@ -234,13 +234,20 @@
    %Set the labels for the levels
    0 qfs rmoveto
    /Energy exch def
+   /spn exch def
    /feed exch def
    /ft exch def
+   %Set the Energy labels for the level
    Efont setfont Energy show
-   -17.1 cm 0 rmoveto
+   %Set the ft value
+   -14.5 cm 0 rmoveto
    Ifont setfont ft getnum upshw
-   14.8 cm 0 rmoveto feed %upshw
+   %Set the feeding
+   0.9 cm 0 rmoveto feed %upshw
    Ifont setfont feed getnum upshw
+   %Set the spin
+   0.6 cm 0 rmoveto spn %upshw
+   Ifont setfont spn getnum upshw
 
    0.5 setlinewidth
    [] 0 setdash
@@ -354,7 +361,6 @@ dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
 /Times findfont 14 scalefont setfont
 12.0 cm 15.5 cm moveto 8 -4 rmoveto (n) show
 
-
 /Times findfont 18 scalefont setfont
 -2.5 cm -1 cm moveto (I  %) show %Put the I_beta label
 /Symbol findfont 13 scalefont setfont
@@ -393,9 +399,9 @@ pop pop pop
 %-----------------------------------------------------------------------------
 % LEVELS:
 %-----------------------------------------------------------------------------
-%Spin Dunno? Label  Position Dunno? isDashed isMother
-%(52(7)      5.5)  (5/2- )  (   0  )     0  0  0  0 level
-() () (0.0)    0.0    0 0 0 level
+% Dunno? Label  Position Dunno? isDashed isMother
+%(52(7) 5.5)  (5/2- )  (   0  )     0  0  0  0 level
+(52(7)) (5.5)  (5/2-) (0.0)    0.0    0 0 0 level
 () () (195.5)  195.5  0 0 0 level
 () () (237.6)  237.6  0 1 0 level
 () () (307.2)  307.2  0 0 0 level
@@ -425,7 +431,7 @@ pop pop pop
 % TRANSITIONS:
 %-----------------------------------------------------------------------------
 LevelEnd 0 translate
-90 rotate               %% Now arrows and labels are plotted horizontally !
+90 rotate               %% Now arrows and labels are plotted properly
 %-----------------------------------------------------------------------------
 () (  195.5)  195.5  0.0   1   [0 0 (none)] trans
 () (  42.1)   237.6  195.5 1   [1 0 (none)] trans   

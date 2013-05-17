@@ -34,7 +34,7 @@
 %You should adjust these to match the size of your bounding box (or not whatever)
 /bbStX 0 cmConv div def 
 /bbStY 0 cmConv div def
-/bbEnX 900 cmConv div def %Adjusts the width of the plot
+/bbEnX 300 cmConv div def %Adjusts the width of the plot
 /bbEnY 700 cmConv div def %Adjusts the height of the plot
 
 %Set the information for the fonts. 
@@ -47,9 +47,8 @@
 /Ifont /Times findfont fontsize scalefont def  % for intensities
 /Ifont2 /Times findfont 8.0 scalefont def  % for log ft etc.
 
-/escale {5 div} def  %%% definition of energy scale
+/escale {5 div} def  %%% definition of energy scale DO NOT CHANGE FOR NOW
 		     %%% achtung!: it is a dividing factor
-		     %%% achtung!: modify when ploting landscape
 /xscale {0.7 mul} def  %%% Mostly adjusts that position of the arrows
 
 % x and y coordinates to start the drawing.
@@ -63,9 +62,10 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
 
 /MaxY 0 cm  def    % Y position of the daughter ground state
 /Mama -1.4 cm def % horizontal position of the mother level
+
+/LevelStart 25 xscale def %DO NOT MODIFY
 /LevelEnd bbEnX 0.85 cm mul def   %horizontal length of the level
 
-/LevelStart 25 xscale def
 % Also important: position of first arrow starting from the right side:
 /ArrowX 100 xscale def       % horiz. position of arrow; initial value
 /ArrowDist 20.0 xscale def  % horiz. distance between arrows
@@ -345,7 +345,7 @@ momXPos momYPos 1.3 cm add 18 /Symbol [(3/2) ( ) ( ) ( ) (-)] supsub
 /arStY momYPos 1 cm add def
 /arEnY arStY arLn sub def
 /arStX momXPos 1.5 cm add def
-/arEnX 1.2 cm def
+/arEnX 1.0 cm def
 arStX arStY arEnX arEnY 1.4 7 7 [0 0 0] arrow fill
 
 % Daughter Nucleus Positioning

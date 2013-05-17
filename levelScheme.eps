@@ -308,21 +308,40 @@
 %-----------------------------------
 % BEGIN MAIN BODY OF COMMANDS
 %-----------------------------------
-%% Mother nucleus description and Q value
+%% Mother nucleus positioning
 /momXPos -1.0 cm Mama add def
 /momYPos 17.75 cm def
+/momLvlPos momYPos 5 mul 5.5 cm add def
 momXPos momYPos 30 /Times-Bold [(Cu) (73) () () ()] supsub
 
 % Put on the label for the spin of the mother
 momXPos momYPos 1.3 cm add 18 /Symbol [(3/2) ( ) ( ) ( ) (-)] supsub
 /Times findfont 18 scalefont setfont
 
-% Daughter Nucleus Information
+%Beta symbol for decay arrow:
+1.0 cm momYPos 20 /Symbol [(b) () () () (-)] supsub
+%Insert the decay arrorw.
+-0.05 cm momYPos 1 cm add 1.2 cm 16.8 cm 1.4 7 7 [0 0 0] arrow fill
+
+% Daughter Nucleus Positioning
 /dauXPos 0.5 LevelEnd mul def
 /dauYPos -1.5 cm def
 dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
 
+%Insert the energy label
 -2 cm LevelEnd add dauYPos 0.25 cm add moveto (E [keV]) show
+
+%Set the Q-value information
+/Times findfont 20 scalefont setfont
+5 cm momYPos moveto (Q  = 6607(4) keV) show
+/Symbol findfont 14 scalefont setfont 
+5 cm momYPos moveto 14 5 neg rmoveto (b) show
+
+%Set the half-life information
+/Times findfont 20 scalefont setfont
+12.0 cm momYPos moveto (T    = 4.2(3) s) show
+/Times findfont 14 scalefont setfont
+12.0 cm momYPos moveto 10 3 neg rmoveto (1/2) show
 
 %/Times findfont 18 scalefont setfont
 %-2.5 cm -1 cm moveto (I  %) show %Put the I_beta label
@@ -337,25 +356,6 @@ dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
 %/Times findfont 14 scalefont setfont
 %1 cm 15.5 cm moveto 8 -4 rmoveto (n) show %Set n for P_n
 
-%Beta symbol for decay arrow:
-1.0 cm momYPos 20 /Symbol [(b) () () () (-)] supsub
-
-%Set the Q-value information
-/Times findfont 20 scalefont setfont
-5 cm momYPos moveto (Q  = 6607(4) keV) show
-/Symbol findfont 14 scalefont setfont 
-5 cm momYPos moveto 14 5 neg rmoveto (b) show
-
-%Set the half-life information
-/Times findfont 20 scalefont setfont
-12.0 cm momYPos moveto (T    = 4.2(3) s) show
-/Times findfont 14 scalefont setfont
-12.0 cm momYPos moveto 10 3 neg rmoveto (1/2) show
-
-%Insert the decay arrorw.
-%newpath 
--0.05 cm 18.7 cm 1.2 cm 16.8 cm 1.4 7 7 [0 0 0] arrow fill
-
 Efont3 setfont
 LevelEnd 0 moveto
 
@@ -364,18 +364,17 @@ LevelEnd 0 moveto
 Efont setfont
 
 %gsave
-  newpath 0 0 moveto
-  (8888.8) stringwidth pop /dx2 exch def    % energy label width
-  dx2 3 div /dx1 exch def
+newpath 0 0 moveto
+(8888.8) stringwidth pop /dx2 exch def    % energy label width
+dx2 3 div /dx1 exch def
 %grestore
 
 %gsave
-  newpath 0 0 moveto
-  (88888.8) true charpath pathbbox
-  2 index sub qfs 2 mul add /dy exch def    % Y distance between energy labels
-  pop pop pop
+newpath 0 0 moveto
+(88888.8) true charpath pathbbox
+2 index sub qfs 2 mul add /dy exch def    % Y distance between energy labels
+pop pop pop
 %grestore
-
 
 /headl 0.20 cm def         % length of arrowhead
 /ht 5. def                 % ht is thickness of arrowhead at its widest part/
@@ -398,7 +397,7 @@ Efont setfont
 
 2 setlinewidth  % for ground state only
 /LevelStart -100 xscale def
-() (  ) ( ) 2675 0 0 1 level
+() (  ) ( ) momLvlPos 0 0 1 level
 
 %Example transition : (10) (218) 314 96 18 [0 0 (none)] trans
 % Intensity label                = 10

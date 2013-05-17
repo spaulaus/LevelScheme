@@ -35,7 +35,7 @@
 % Some interesting features to be modified:
 /MaxY 0 cm  def    % Y position of the daughter ground state
 /Mama -0.7 cm def % horizontal position of the mother level
-/LevelEnd 15 cm def   %horizontal length of the level
+/LevelEnd 12 cm def   %horizontal length of the level
 		      %this+translation shouldn't exceed 21 cm
 /LevelStart 25 xscale def
 % Also important: position of first arrow starting from the right side:
@@ -240,7 +240,7 @@
    %Set the Energy labels for the level
    Efont setfont Energy show
    %Set the ft value
-   -14.5 cm 0 rmoveto
+   -2.5 cm LevelEnd sub 0 rmoveto
    Ifont setfont spn getnum upshw
    %Set the feeding
    0.9 cm 0 rmoveto ft %upshw

@@ -4,7 +4,6 @@
 %Written: Unknown - Date: Unknown (someone knowing German by the comments).
 %Heavy procedure and layout modifications by S.V. Paulauskas - December 2011
 %Landscape Mode updated by N.T. Brewer - January 2012
-
 %--------------------------------------------------------
 %   BEGIN PROCEDURE LIST
 %--------------------------------------------------------
@@ -21,7 +20,7 @@
 /escale {5 div} def  %%% definition of energy scale
 		     %%% achtung!: it is a dividing factor
 		     %%% achtung!: modify when ploting landscape
-/xscale {0.75 mul} def  %%% this will give a wider plot
+/xscale {0.7 mul} def  %%% Mostly adjusts that position of the arrows
 /cm {28.34646 mul} def %Defines the conversion from ps units to cm.
 
 % x and y coordinates of starting point for levels:
@@ -55,7 +54,7 @@
 } def
 
 %Uncomment the following line to enable printing in landscape as defined
-%in the above routine.
+%in the above routine. The height may need to be adjusted
 %landscape
 
 %********** supsub **********
@@ -349,18 +348,22 @@ dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
 /Times findfont 14 scalefont setfont
 12.0 cm momYPos moveto 10 3 neg rmoveto (1/2) show
 
-%/Times findfont 18 scalefont setfont
-%-2.5 cm -1 cm moveto (I  %) show %Put the I_beta label
-%/Symbol findfont 13 scalefont setfont
-%-2.5 cm -1 cm moveto 5 -3 rmoveto (b) show %Put the beta in the I_beta label
-%/Times findfont 18 scalefont setfont
-%-0.8 cm -1 cm moveto (log) show %Put the log for log(ft)
-%/Times-Italic findfont 15 scalefont setfont
-%0.2 cm -1 cm moveto (ft) show %Put the ft for log(ft)
-%/Times findfont 18 scalefont setfont
-%1. cm 15.5 cm  moveto (P = 12(4)%) show %Beta-delayed neutron probability
-%/Times findfont 14 scalefont setfont
-%1 cm 15.5 cm moveto 8 -4 rmoveto (n) show %Set n for P_n
+%Set the Pn information
+/Times findfont 18 scalefont setfont
+12.0 cm 15.5 cm  moveto (P = 12(4)%) show 
+/Times findfont 14 scalefont setfont
+12.0 cm 15.5 cm moveto 8 -4 rmoveto (n) show
+
+
+/Times findfont 18 scalefont setfont
+-2.5 cm -1 cm moveto (I  %) show %Put the I_beta label
+/Symbol findfont 13 scalefont setfont
+-2.5 cm -1 cm moveto 5 -3 rmoveto (b) show %Put the beta in the I_beta label
+/Times findfont 18 scalefont setfont
+-0.8 cm -1 cm moveto (log) show %Put the log for log(ft)
+/Times-Italic findfont 15 scalefont setfont
+0.2 cm -1 cm moveto (ft) show %Put the ft for log(ft)
+/Times findfont 18 scalefont setfont
 
 Efont3 setfont
 LevelEnd 0 moveto

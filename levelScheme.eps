@@ -1,4 +1,4 @@
-%!PS-Adobe-2.0 EPSF-1.2
+%!PS-Adobe-2.0 EPSF-2.0
 %%BoundingBox: 0 0 900 700
 %This PostScript file produces the partial level scheme for 73Zn.
 %Originally Written By: Unknown - Date: Unknown (someone knowing German by the comments).
@@ -6,6 +6,12 @@
 %--------------------------------------------------------
 %   BEGIN PROCEDURE LIST
 %--------------------------------------------------------
+%Set variables related to the bounding box
+/bbStX 0 def
+/bbStY 0 def
+/bbEnX 900 def
+/bbEnY 700 def
+
 %Set the information for the fonts. 
 /fontsize 13.0 def 
 /fontsize2 1.5 def 
@@ -35,7 +41,8 @@
 /MaxY 0 cm  def    % Y position of the daughter ground state
 /Mama -0.7 cm def % horizontal position of the mother level
 /LevelEnd 27 cm def   %horizontal length of the level
-		      %this+translation shouldn't exceed 21 cm
+		      %This should be adjusted to longer if you desire wider level scheme
+                      %NOTE: Be sure to adjust the x width of the bounding box!!
 /LevelStart 25 xscale def
 % Also important: position of first arrow starting from the right side:
 /ArrowX 100 xscale def       % horiz. position of arrow; initial value

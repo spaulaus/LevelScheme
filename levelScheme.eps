@@ -1,16 +1,18 @@
-%!PS-Adobe-2.0 EPSF-2.0
+%!PS-Adobe-3.0 EPSF-3.0
 %%BoundingBox: 0 0 900 700
 %This PostScript file produces the partial level scheme for 73Zn.
 %Originally Written By: Unknown - Date: Unknown (someone knowing German by the comments).
-%Rewritten by : S.V. Paulauskas - December 2011
+%Rewritten by : S.V. Paulauskas - 01 December 2011,
+%Last Modified: SVP - 17 May 2013
+%This file is distributed under the GPL v. 3.0
 %--------------------------------------------------------
 %   BEGIN PROCEDURE LIST
 %--------------------------------------------------------
-%Set variables related to the bounding box
-/bbStX 0 def
-/bbStY 0 def
-/bbEnX 900 def
-/bbEnY 700 def
+%Set variables related to the bounding box. UNITS OF CM!!
+/bbStX 0 28.34646 div def 
+/bbStY 0 28.34646 div def
+/bbEnX 900 28.34646 div def
+/bbEnY 700 28.34646 div def
 
 %Set the information for the fonts. 
 /fontsize 13.0 def 
@@ -29,7 +31,7 @@
 /cm {28.34646 mul} def %Defines the conversion from ps units to cm.
 
 % x and y coordinates of starting point for levels:
-3 cm 3 cm translate %The y coordinate should probably not be changed.
+3 cm 2 cm translate %The y coordinate should probably not be changed.
 
 5 setmiterlimit  % avoid spikes on end of narrow arrows
 /halffs {fontsize 2 div} def %Changes position of the "-" in the decay superscript

@@ -235,19 +235,19 @@
    0 qfs rmoveto
    /Energy exch def
    /spn exch def
-   /feed exch def
    /ft exch def
+   /feed exch def
    %Set the Energy labels for the level
    Efont setfont Energy show
    %Set the ft value
    -14.5 cm 0 rmoveto
-   Ifont setfont ft getnum upshw
-   %Set the feeding
-   0.9 cm 0 rmoveto feed %upshw
-   Ifont setfont feed getnum upshw
-   %Set the spin
-   0.6 cm 0 rmoveto spn %upshw
    Ifont setfont spn getnum upshw
+   %Set the feeding
+   0.9 cm 0 rmoveto ft %upshw
+   Ifont setfont ft getnum upshw
+   %Set the spin
+   0.6 cm 0 rmoveto feed %upshw
+   Ifont setfont feed getnum upshw
 
    0.5 setlinewidth
    [] 0 setdash
@@ -399,20 +399,19 @@ pop pop pop
 %-----------------------------------------------------------------------------
 % LEVELS:
 %-----------------------------------------------------------------------------
-% Dunno? Label  Position Dunno? isDashed isMother
-%(52(7) 5.5)  (5/2- )  (   0  )     0  0  0  0 level
-(52(7)) (5.5)  (5/2-) (0.0)    0.0    0 0 0 level
-() () (195.5)  195.5  0 0 0 level
-() () (237.6)  237.6  0 1 0 level
-() () (307.2)  307.2  0 0 0 level
-() () (449.6)  449.6  0 0 0 level
-() () (502.2)  502.2  0 0 0 level
-() () (1124.0) 1124.0 0 0 0 level
-() () (2008.9) 2008.9 0 0 0 level
+%Spin log(ft) feeding Energy(label) Energy(pos) Dunno? isDashed isMother
+(5/2-) (5.5) (52(7)) (0.0)    0.0    0 0 0 level
+() () () (195.5)  195.5  0 0 0 level
+() () () (237.6)  237.6  0 1 0 level
+() () () (307.2)  307.2  0 0 0 level
+() () () (449.6)  449.6  0 0 0 level
+() () () (502.2)  502.2  0 0 0 level
+() () () (1124.0) 1124.0 0 0 0 level
+() () () (2008.9) 2008.9 0 0 0 level
 
 2 setlinewidth  % for ground state only
 /LevelStart -100 xscale def
-() (  ) ( ) momLvlPos 0 0 1 level
+() () () () momLvlPos 0 0 1 level
 
 %Example transition : (10) (218) 314 96 18 [0 0 (none)] trans
 % Intensity label                = 10

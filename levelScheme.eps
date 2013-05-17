@@ -1,9 +1,8 @@
 %!PS-Adobe-2.0 EPSF-1.2
-%%BoundingBox: 0 0 650 700
+%%BoundingBox: 0 0 900 700
 %This PostScript file produces the partial level scheme for 73Zn.
-%Written: Unknown - Date: Unknown (someone knowing German by the comments).
-%Heavy procedure and layout modifications by S.V. Paulauskas - December 2011
-%Landscape Mode updated by N.T. Brewer - January 2012
+%Originally Written By: Unknown - Date: Unknown (someone knowing German by the comments).
+%Rewritten by : S.V. Paulauskas - December 2011
 %--------------------------------------------------------
 %   BEGIN PROCEDURE LIST
 %--------------------------------------------------------
@@ -35,27 +34,12 @@
 % Some interesting features to be modified:
 /MaxY 0 cm  def    % Y position of the daughter ground state
 /Mama -0.7 cm def % horizontal position of the mother level
-/LevelEnd 12 cm def   %horizontal length of the level
+/LevelEnd 27 cm def   %horizontal length of the level
 		      %this+translation shouldn't exceed 21 cm
 /LevelStart 25 xscale def
 % Also important: position of first arrow starting from the right side:
 /ArrowX 100 xscale def       % horiz. position of arrow; initial value
 /ArrowDist 20.0 xscale def  % horiz. distance between arrows
-
-%Landscape subroutine to help ease the transition into landscape mode
-%Written N.T. Brewer
-/landscape {
-   90 rotate
-   2 cm -15 cm translate
-   1 0.9 scale
-   /LevelEnd 25.0 cm def
-   /textpos {1.74 mul} def % adjusts text labels of daughter and E[keV]
-   /ArrowDist 25.0 xscale def  %horiz. distance between arrows
-} def
-
-%Uncomment the following line to enable printing in landscape as defined
-%in the above routine. The height may need to be adjusted
-%landscape
 
 %********** supsub **********
 %Show superscripts, subscripts, a and z for nuclei

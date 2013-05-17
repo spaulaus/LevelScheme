@@ -31,7 +31,7 @@
 /cm {cmConv mul} def %Defines the cm unit
                      
 %Set variables related to the bounding box. UNITS OF CM!!
-%You should adjust these to match the size of your bounding box
+%You should adjust these to match the size of your bounding box (or not whatever)
 /bbStX 0 cmConv div def 
 /bbStY 0 cmConv div def
 /bbEnX 900 cmConv div def %Adjusts the width of the plot
@@ -62,7 +62,7 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
 /qfs {fontsize 4 div } def %Seems to change position of the labels.
 
 /MaxY 0 cm  def    % Y position of the daughter ground state
-/Mama -0.7 cm def % horizontal position of the mother level
+/Mama -1.4 cm def % horizontal position of the mother level
 /LevelEnd bbEnX 0.85 cm mul def   %horizontal length of the level
 
 /LevelStart 25 xscale def
@@ -329,7 +329,7 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
 %-----------------------------------
 %% Mother nucleus positioning
 /momXPos -1.0 cm Mama add def
-/momYPos 17 cm def
+/momYPos bbEnY 0.8 cm mul def
 /momLvlPos momYPos 5 mul 5.5 cm add def
 momXPos momYPos 30 /Times-Bold [(Cu) (73) () () ()] supsub
 
@@ -425,6 +425,7 @@ pop pop pop
 2 setlinewidth  % for ground state only
 /LevelStart -100 xscale def
 () () () () momLvlPos 0 0 1 level
+
 
 %Example transition : (10) (218) 314 96 18 [0 0 (none)] trans
 % Intensity label                = 10

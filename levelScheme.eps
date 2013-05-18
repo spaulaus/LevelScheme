@@ -51,7 +51,6 @@
 
 /escale {5 div} def  %%% definition of energy scale DO NOT CHANGE FOR NOW
 		     %%% achtung!: it is a dividing factor
-/xscale {0.7 mul} def  %%% Mostly adjusts that position of the arrows
 
 % x and y coordinates to start the drawing.
 bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not be changed.
@@ -65,12 +64,12 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
 /MaxY 0 cm  def    % Y position of the daughter ground state
 /Mama -1.4 cm def % horizontal position of the mother level
 
-/LevelStart 25 xscale def %DO NOT MODIFY
+/LevelStart 17.5 def %DO NOT MODIFY
 /LevelEnd bbEnX 0.85 cm mul def   %horizontal length of the level
 
 % Also important: position of first arrow starting from the right side:
-/ArrowX 100 xscale def       % horiz. position of arrow; initial value
-/ArrowDist 20.0 xscale def  % horiz. distance between arrows
+/ArrowX 70 def       % horiz. position of arrow; initial value
+/ArrowDist 14 def  % horiz. distance between arrows
 
 %********** supsub **********
 %Show superscripts, subscripts, a and z for nuclei
@@ -425,9 +424,8 @@ pop pop pop
 () () () (2008.9) 2008.9 0 0 0 level
 
 2 setlinewidth  % for ground state only
-/LevelStart -100 xscale def
+/LevelStart 0 def
 () () () () momLvlPos 0 0 1 level
-
 
 %Example transition : (10) (218) 314 96 18 [0 0 (none)] trans
 % Intensity label                = 10

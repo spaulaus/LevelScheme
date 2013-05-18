@@ -3,7 +3,4 @@
 2. Need to fix the stuff up around the mother level. 
 3. Need to get things more compliant with the Adobe 3.0 standard. Mostly comments, and things
    of that nature.
-4. Need to twiddle around with this energy scale stuff - It's screwing up the automatic y 
-   positioning
-5. Automate the positioning of the arrows. 
-6. Gotta figure out where to put all of these damn labels Q, T, and Pn
+4. Gotta figure out where to put all of these damn labels Q, T, and Pn

@@ -35,9 +35,9 @@
 % along with this program.  If not, see <http://www.gnu.org/licenses/>. -
 % -----------------------------------------------------------------------
 
-%--------------------------------------------------------
-%   BEGIN PROCEDURE LIST
-%--------------------------------------------------------
+%-------------------------------------------------------------------------------
+% DEFINITIONS:
+%-------------------------------------------------------------------------------
 /cmConv 28.34646 def %DO NOT ADJUST THIS PARAMETER
                      %Defines the conversion factor between ps and cm
 /cm {cmConv mul} def %Defines the cm unit
@@ -62,6 +62,7 @@
 /eFac 5 def          % DO NOT CHANGE!!! Defines the energy contraction factor
 /escale {eFac div} def  %%% definition of energy scale DO NOT CHANGE FOR NOW
 		        %%% achtung!: it is a dividing factor
+                        
 % x and y coordinates to start the drawing.
 bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not be changed.
 
@@ -72,15 +73,18 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
 /qfs {fontsize 4 div } def %Seems to change position of the labels.
 
 /MaxY 0 cm  def    % Y position of the daughter ground state
-/Mama -1.4 cm def % horizontal position of the mother level
+/MamaX -1.4 cm def % horizontal position of the mother level
 
 /LevelStart 17.5 def %DO NOT MODIFY
 /LevelEnd bbEnX 0.85 cm mul def   %horizontal length of the level
 
-% Also important: position of first arrow starting from the right side:
+%---------- Transition Arrow Positioning ---------
 /ArrowX 70 def       % horiz. position of arrow; initial value
-/ArrowDist 14 def  % horiz. distance between arrows
+/ArrowDist 18 def  % horiz. distance between arrows
 
+%-------------------------------------------------------------------------------
+% PROCEDURES:
+%-------------------------------------------------------------------------------
 %********** supsub **********
 %Show superscripts, subscripts, a and z for nuclei
 /scriptdict 20 dict def
@@ -233,7 +237,7 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
    isMother 0 eq {
       LevelEnd dx1 sub dx2 sub Elevel lineto
    } {
-      Mama dx1 sub dx2 sub Elevel lineto
+      MamaX dx1 sub dx2 sub Elevel lineto
    } ifelse
    Elevel MaxY ge {
       Elevel dy down mul sub
@@ -335,23 +339,23 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
     setgray fill grestore
 } def
 
-%-----------------------------------
-% BEGIN MAIN BODY OF COMMANDS
-%-----------------------------------
-%% Mother nucleus positioning
+%-------------------------------------------------------------------------------
+% LABELS:
+%-------------------------------------------------------------------------------
+%%---------- Mother Label ---------
 /momLvlPos bbEnY 0.9 cm mul eFac mul def
-/momXPos -1.0 cm Mama add def
+/momXPos -1.0 cm MamaX add def
 /momYPos momLvlPos escale 1.15 cm sub def
 momXPos momYPos 30 /Times-Bold [(Cu) (73) () () ()] supsub
 
-% Put on the label for the spin of the mother
+%---------- Mother Spin/Parity ----------
 momXPos momYPos 1.3 cm add 18 /Symbol [(3/2) ( ) ( ) ( ) (-)] supsub
 /Times findfont 18 scalefont setfont
 
-%Beta symbol for decay arrow:
+%---------- Decay Type Label ----------
 1.0 cm momYPos 20 /Symbol [(b) () () () (-)] supsub
 
-%Insert the decay arrorw.
+%---------- Decay Arrow ----------
 /arLn 2 cm def
 /arStY momYPos 1 cm add def
 /arEnY arStY arLn sub def
@@ -359,42 +363,49 @@ momXPos momYPos 1.3 cm add 18 /Symbol [(3/2) ( ) ( ) ( ) (-)] supsub
 /arEnX 1.0 cm def
 arStX arStY arEnX arEnY 1.4 7 7 [0 0 0] arrow fill
 
-% Daughter Nucleus Positioning
+%---------- Daughter Label ------------
 /dauXPos 0.5 LevelEnd mul def
 /dauYPos -1.5 cm def
 dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
 
-%Insert the energy label
+%---------- Energy Label ----------
 -2 cm LevelEnd add dauYPos 0.25 cm add moveto (E [keV]) show
 
-%Set the Q-value information
+%---------- Q-value  ----------
 /Times findfont 20 scalefont setfont
 5 cm momYPos moveto (Q  = 6607(4) keV) show
 /Symbol findfont 14 scalefont setfont 
 5 cm momYPos moveto 14 5 neg rmoveto (b) show
 
-%Set the half-life information
+%---------- Half-Life ----------
 /Times findfont 20 scalefont setfont
 12.0 cm momYPos moveto (T    = 4.2(3) s) show
 /Times findfont 14 scalefont setfont
 12.0 cm momYPos moveto 10 3 neg rmoveto (1/2) show
 
-%Set the Pn information
+%----------- Pn -----------
 /Times findfont 18 scalefont setfont
 12.0 cm 15.5 cm  moveto (P = 12(4)%) show 
 /Times findfont 14 scalefont setfont
 12.0 cm 15.5 cm moveto 8 -4 rmoveto (n) show
 
+%---------- Intensity ----------
 /Times findfont 18 scalefont setfont
 -2.5 cm -1 cm moveto (I  %) show %Put the I_beta label
 /Symbol findfont 13 scalefont setfont
 -2.5 cm -1 cm moveto 5 -3 rmoveto (b) show %Put the beta in the I_beta label
 /Times findfont 18 scalefont setfont
+
+%---------- log(ft) ----------
 -0.8 cm -1 cm moveto (log) show %Put the log for log(ft)
 /Times-Italic findfont 15 scalefont setfont
 0.2 cm -1 cm moveto (ft) show %Put the ft for log(ft)
 /Times findfont 18 scalefont setfont
 
+
+%-------------------------------------------------------------------------------
+% FONT DEFINITIONS:
+%-------------------------------------------------------------------------------
 Efont3 setfont
 LevelEnd 0 moveto
 
@@ -420,11 +431,11 @@ pop pop pop
 			   % thickness of tail.
 /intensity {0.08 mul} def  % intensity scales the width of the arrow.
 
-%-----------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % LEVELS:
-%-----------------------------------------------------------------------------
-%Spin log(ft) feeding Energy(label) Energy(pos) Dunno? isDashed isMother
-(5/2-) (5.5) (52(7)) (0.0)    0.0    0 0 0 level
+%-------------------------------------------------------------------------------
+%Spin  log(ft) feeding  Energy(label) Energy(pos) Dunno? isDashed isMother
+(5/2-) (5.5) (52(7)) (0.0) 0.0 0 0 0 level
 () () () (195.5)  195.5  0 0 0 level
 () () () (237.6)  237.6  0 1 0 level
 () () () (307.2)  307.2  0 0 0 level
@@ -433,29 +444,31 @@ pop pop pop
 () () () (1124.0) 1124.0 0 0 0 level
 () () () (2008.9) 2008.9 0 0 0 level
 
+%-------------------------------------------------------------------------------
+% PARENT LEVEL:
+%-------------------------------------------------------------------------------
 2 setlinewidth  % for ground state only
 /LevelStart 0 def
 () () () () momLvlPos 0 0 1 level
 
-%Example transition : (10) (218) 314 96 18 [0 0 (none)] trans
+%-------------------------------------------------------------------------------
+% TRANSITIONS:
+%-------------------------------------------------------------------------------
+%Example transition : ((10)) (218) 314 96 18 [0 0 (none)] trans
 % Intensity label                = 10
 % Energy label                   = 218
 % Efrom                          = 314 Y of tail of arrow
 % Eto                            =  96 Y of tip of arrow
 % Intensity                      =  18 defines width of arrow
-% [a b c]                        =  a > 1 for dashed arror
+% [a b c]                        =  a > 1 for dashed arrow
 %				 =  b = 1(=red), 2(=green), 3(=blue)
-%				 = coincidence information (up),(down),(both),(none)
-
+%				 = coincidence info (up),(down),(both),(none)
 % see trans for definition of real arrow width in terms of Intensity
 % headl = length of arrowhead is a global parameter
 
-%--------------------------------------------------------------------
-% TRANSITIONS:
-%-----------------------------------------------------------------------------
 LevelEnd 0 translate
 90 rotate               %% Now arrows and labels are plotted properly
-%-----------------------------------------------------------------------------
+%-----------------------------------------------------
 () (  195.5)  195.5  0.0   1   [0 0 (none)] trans
 () (  42.1)   237.6  195.5 1   [1 0 (none)] trans   
 () (  307.2)  307.2  0.0   5.6 [0 0 (none)] trans
@@ -463,4 +476,4 @@ LevelEnd 0 translate
 () (  502.2)  502.2  0.0   17  [0 0 (none)] trans
 () (  674.4)  1124.0 449.2 7   [0 0 (down)] trans
 () (  1559.3) 2008.9 449.2 2   [0 0 (down)] trans
-%-----------------------------------------------------------------------------
+%-----------------------------------------------------

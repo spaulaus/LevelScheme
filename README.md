@@ -20,13 +20,13 @@ If you have questions or comments please feel free to send them my way.
 ##Features
 Here is a list, in no particular order, of the features.
 
-* Dashed levels/transitions - For tenative tricky types.
+* Dashed levels/transitions - For tentative tricky types.
 * Colored transitions - You can make the new ones pop with red, green, or blue
 * Add the Pn, Qbeta, Sn, etc.
 * Label levels with spin/parity log(ft) feeding intensity, etc. (or don't
   that's cool too).
 * Intensity and energy labels for transitions
-* Concidence labeling for transitions.
+* Coincidence labeling for transitions.
 * Width of transition arrow denotes strength of transition
 * All energies (with the current exception of the parent g.s.) are placed
   to scale.
@@ -43,7 +43,7 @@ automatically. There are several aspects that may need to be addressed, but
 we'll get to those. I have roughly put the following sections in order of what
 you should do to fill out your level scheme.
 
-Any of the function arguments that are in brances "()" are printed text. If
+Any of the function arguments that are in braces "()" are printed text. If
 you do not want to use a particular one it may be left blank. This does not mean
 that you can remove it from the function call. 
 
@@ -63,7 +63,7 @@ the line. You can set all of them to be the same value (I like 10) if you do not
 need this.
 
 The coincidences are denoted by filled circles at the ends of the arrows. We
-currently do not suppor the open style of the circles. 
+currently do not support the open style of the circles. 
 
 ###List of Arguments for "trans" procedure
 * **Intensity -** The label for the intensity of the line
@@ -136,7 +136,7 @@ I the names listed here are the same as the comments labeling the section of
 the code. You can just search for this name and find it.
 
 * **log(ft) -** Sets the label for the log(ft)'s associated with the levels
-* **Intensity -** Sets the label for the feeding intenstity for the level
+* **Intensity -** Sets the label for the feeding intensity for the level
 * **Pn -** Sets the Pn of the decay
 * **Half-Life -** Sets the half-life of the decay
 * **Q-value -** Sets the Q-value for the decay
@@ -144,7 +144,7 @@ the code. You can just search for this name and find it.
 * **Daughter Label -** Prints the label for the daughter nucleus.
 * **Decay Arrow -** Prints an arrow denoting the decay.
 * **Decay Type Label -** Prints the beta (+,-) associated with the decay.
-* **Mother Spin/Parity -** Prints the spin/partiy of the mother nucleus
+* **Mother Spin/Parity -** Prints the spin/parity of the mother nucleus
 * **Mother Label -** Prints the label for the mother nucleus
 
 ###Example label:

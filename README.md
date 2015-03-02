@@ -1,7 +1,5 @@
 Level Scheme Generator
 ======================
--------------------------------------------------------------------------------
-
 This is a code that one can use to generate publication quality level schemes
 fairly easily. There is a little bit of manual setup that needs to be done, but
 I am going to work under the assumption that people can follow/read direction.
@@ -33,7 +31,6 @@ Here is a list, in no particular order, of the features.
 
 Getting Started
 ===============
--------------------------------------------------------------------------------
 The easiest thing to do to get rolling with this program is to just dive in. We
 are going to start at the bottom and work our way up. This is going to be the
 easiest due to the RPN style of the stack.

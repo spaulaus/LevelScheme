@@ -1,5 +1,5 @@
 %!PS-Adobe-3.0 EPSF-3.0
-%%BoundingBox: 0 0 900 700
+%%BoundingBox: 0 0 400 650
 %-----------------------------------------------------------
 %  Description: This code generates a level scheme for
 %  	radioactive nuclei. One can insert gammas, energies,
@@ -41,7 +41,6 @@
 /cmConv 28.34646 def %DO NOT ADJUST THIS PARAMETER
                      %Defines the conversion factor between ps and cm
 /cm {cmConv mul} def %Defines the cm unit
-/eFac 5 def          %Defines the energy contraction factor DO NOT CHANGE!!!
 
 %Set variables related to the bounding box. UNITS OF CM!!
 %You should adjust these to match the size of your bounding box (or not whatever)
@@ -60,6 +59,7 @@
 /Ifont /Times findfont fontsize scalefont def  % for intensities
 /Ifont2 /Times findfont 8.0 scalefont def  % for log ft etc.
 
+/eFac 5 def          % DO NOT CHANGE!!! Defines the energy contraction factor
 /escale {eFac div} def  %%% definition of energy scale DO NOT CHANGE FOR NOW
 		        %%% achtung!: it is a dividing factor
 % x and y coordinates to start the drawing.
@@ -339,7 +339,7 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
 % BEGIN MAIN BODY OF COMMANDS
 %-----------------------------------
 %% Mother nucleus positioning
-/momLvlPos bbEnY 0.8 cm mul eFac mul def
+/momLvlPos bbEnY 0.9 cm mul eFac mul def
 /momXPos -1.0 cm Mama add def
 /momYPos momLvlPos escale 1.15 cm sub def
 momXPos momYPos 30 /Times-Bold [(Cu) (73) () () ()] supsub

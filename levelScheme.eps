@@ -273,7 +273,7 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
 
    Elevel 0 eq { /Elevel Elevel 2.0 add def} if
    
-   %Set the feeding value
+   %Set the spin for the energy level
    LevelStart dx3 dx4 add sub Elevel dE 0.35 mul add moveto spn
    Ifont setfont spn getnum upshw
 
@@ -281,7 +281,7 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
    LevelStart -2.5 cm add Elevel moveto ft
    Ifont setfont ft getnum upshw
 
-   %Set the spin
+   %Set the feeding
    LevelStart -4. cm add Elevel moveto feed
    Ifont setfont feed getnum upshw
 

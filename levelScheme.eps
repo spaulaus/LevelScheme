@@ -38,7 +38,7 @@
 %-------------------------------------------------------------------------------
 % DEFINITIONS:
 %-------------------------------------------------------------------------------
-/cmConv 28.34646 def %DO NOT ADJUST THIS PARAMETER
+/cmConv 28.34646 def %DO NOT ADJUST THIS PARAMETER (really)
                      %Defines the conversion factor between ps and cm
 /cm {cmConv mul} def %Defines the cm unit
 
@@ -48,6 +48,8 @@
 /bbStY 0 cmConv div def
 /bbEnX 300 cmConv div def %Adjusts the width of the plot
 /bbEnY 600 cmConv div def %Adjusts the height of the plot
+% x and y coordinates to start the drawing.
+bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be changed.
 
 %Set the information for the fonts. 
 /fontsize 13.0 def 
@@ -59,24 +61,21 @@
 /Ifont /Times findfont fontsize scalefont def  % for intensities
 /Ifont2 /Times findfont 8.0 scalefont def  % for log ft etc.
 
-/eFac 5 def          % DO NOT CHANGE!!! Defines the energy contraction factor
-/escale {eFac div} def  %%% definition of energy scale DO NOT CHANGE FOR NOW
-		        %%% achtung!: it is a dividing factor
+%---------- Defines the energy contraction factor (squeeze in Y) ---------
+/eFac 6 def  %Defines the energy contraction factor, modifications may require a
+             %change to the bounding box
+/escale {eFac div} def  %DO NOT CHANGE : definition for energy scaling procedure
                         
-% x and y coordinates to start the drawing.
-bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be changed.
-
 5 setmiterlimit  % avoid spikes on end of narrow arrows
 /halffs {fontsize 2 div} def %Changes position of the "-" in the decay superscript
 /nhalffs {fontsize -2.7 div} def %Changes position of "n" on S_n
-/fullfs {fontsize 1 div} def %unused
 /qfs {fontsize 4 div} def %Seems to change position of the labels.
 
-/MaxY 0 cm  def    % Y position of the daughter ground state
-/MamaX -1.4 cm def % horizontal position of the mother level
+/DaugherGsYPos 0 cm  def    % Y position of the daughter ground state
+/MotherX -1.4 cm def % horizontal position of the mother level
 
 %---------- Energy Level Information ---------
-/LevelStart 0.5 cm def %Modifies where the levels "start" (basically a squeeze)
+/LevelStart 0.5 cm def %Modifies where the levels "start" (Squeeze in X)
 /LevelLength bbEnX 0.85 cm mul def   %horizontal length of the level
 /LevelEnd LevelStart LevelLength sub def %Defines the end of the energy level
 
@@ -91,7 +90,7 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
 % PROCEDURES:
 %-------------------------------------------------------------------------------
 %********** supsub **********
-%Show superscripts, subscripts, a and z for nuclei
+%Show superscripts, subscripts
 /scriptdict 20 dict def
 /supsub { scriptdict begin
    /ary exch def
@@ -242,13 +241,13 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
    isMother 0 eq {
       LevelLength dx1 sub dx2 sub Elevel lineto
    } {
-      MamaX dx1 sub dx2 sub Elevel lineto
+      MotherX dx1 sub dx2 sub Elevel lineto
    } ifelse
-   Elevel MaxY ge {
+   Elevel DaugherGsYPos ge {
       Elevel dy down mul sub
-      MaxY lt { MaxY Elevel sub } { dy down mul neg } ifelse
+      DaugherGsYPos lt { DaugherGsYPos Elevel sub } { dy down mul neg } ifelse
       /dE exch def } {
-      MaxY Elevel sub /dE exch def
+      DaugherGsYPos Elevel sub /dE exch def
    } ifelse
 
    isMother 0 eq {
@@ -263,7 +262,7 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
    Elevel dE add
    /Elevel exch def
    Elevel dy add
-   /MaxY exch def
+   /DaugherGsYPos exch def
    dup stringwidth pop neg LevelLength add Elevel moveto
 
    %Set the labels for the levels
@@ -356,7 +355,7 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
 %-------------------------------------------------------------------------------
 %%---------- Mother Label ---------
 /momLvlPos bbEnY 0.9 cm mul eFac mul def
-/momXPos -1.0 cm MamaX add def
+/momXPos -1.0 cm MotherX add def
 /momYPos momLvlPos escale 1.15 cm sub def
 momXPos momYPos 30 /Times-Bold [(Cu) (73) () () ()] supsub
 
@@ -383,23 +382,23 @@ dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
 %---------- Energy Label ----------
 -2 cm LevelLength add dauYPos 0.25 cm add moveto (E [keV]) show
 
+/ExtraLabelAlign 3.0 cm def
 %---------- Q-value  ----------
 /Times findfont 20 scalefont setfont
-5 cm momYPos moveto (Q  = 6607(4) keV) show
+ExtraLabelAlign momYPos moveto (Q  = 6607(4) keV) show
 /Symbol findfont 14 scalefont setfont 
-5 cm momYPos moveto 14 5 neg rmoveto (b) show
+ExtraLabelAlign momYPos moveto 14 5 neg rmoveto (b) show
 
 %---------- Half-Life ----------
 /Times findfont 20 scalefont setfont
-12.0 cm momYPos moveto (T    = 4.2(3) s) show
+ExtraLabelAlign momYPos moveto (T    = 4.2(3) s) show
 /Times findfont 14 scalefont setfont
-12.0 cm momYPos moveto 10 3 neg rmoveto (1/2) show
+ExtraLabelAlign momYPos moveto 10 3 neg rmoveto (1/2) show
 
 %----------- Pn -----------
+ExtraLabelAlign 15.5 cm 18 /Times [(P) () () (n) ()] supsub
 /Times findfont 18 scalefont setfont
-12.0 cm 15.5 cm  moveto (P = 12(4)%) show 
-/Times findfont 14 scalefont setfont
-12.0 cm 15.5 cm moveto 8 -4 rmoveto (n) show
+13 4 rmoveto ( = 12(4)%) show 
 
 %---------- Intensity ----------
 /Times findfont 18 scalefont setfont

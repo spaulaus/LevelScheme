@@ -75,9 +75,10 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
 /MaxY 0 cm  def    % Y position of the daughter ground state
 /MamaX -1.4 cm def % horizontal position of the mother level
 
-/LevelStart 17.5 def %DO NOT MODIFY
+%---------- Energy Level Information ---------
+/LevelStart 0.5 cm def %Modifies where the levels "start" (basically a squeeze)
 /LevelLength bbEnX 0.85 cm mul def   %horizontal length of the level
-/LevelEnd LevelStart LevelLength sub def
+/LevelEnd LevelStart LevelLength sub def %Defines the end of the energy level
 
 %---------- Transition Arrow Positioning ---------
 /ArrowX 70 def       % horiz. position of arrow; initial value
@@ -402,15 +403,15 @@ dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
 
 %---------- Intensity ----------
 /Times findfont 18 scalefont setfont
--3.5 cm -1 cm moveto (I  %) show %Put the I_beta label
+-4 cm LevelStart add -1 cm moveto (I  %) show %Put the I_beta label
 /Symbol findfont 13 scalefont setfont
--3.5 cm -1 cm moveto 5 -3 rmoveto (b) show %Put the beta in the I_beta label
+-4 cm LevelStart add -1 cm moveto 5 -3 rmoveto (b) show %Put the beta in the I_beta label
 /Times findfont 18 scalefont setfont
 
 %---------- log(ft) ----------
--2.1 cm -1 cm moveto (log) show %Put the log for log(ft)
+-2.7 cm LevelStart add -1 cm moveto (log) show %Put the log for log(ft)
 /Times-Italic findfont 15 scalefont setfont
--1.2 cm -1 cm moveto (ft) show %Put the ft for log(ft)
+-1.8 cm LevelStart add -1 cm moveto (ft) show %Put the ft for log(ft)
 /Times findfont 18 scalefont setfont
 
 

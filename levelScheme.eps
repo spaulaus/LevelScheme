@@ -83,6 +83,9 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
 /ArrowX 70 def       % horiz. position of arrow; initial value
 /ArrowDist 18 def  % horiz. distance between arrows
 
+%---------- Point Size For Coincidences ---------
+/CoinPointSize 0.11 def
+
 %-------------------------------------------------------------------------------
 % PROCEDURES:
 %-------------------------------------------------------------------------------
@@ -178,10 +181,10 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
    closepath
    savematrix setmatrix
       
-   coinType (up)   eq {tailx taily 0.11 cm 0 360 arc fill} if
-   coinType (down) eq {tipx tipy 0.11 cm 0 360 arc fill} if
-   coinType (both) eq {tipx tipy 0.11 cm 0 360 arc fill  
-                       tailx taily 0.11 cm 0 360 arc fill} if
+   coinType (up)   eq {tailx taily CoinPointSize cm 0 360 arc fill} if
+   coinType (down) eq {tipx tipy CoinPointSize cm 0 360 arc fill} if
+   coinType (both) eq {tipx tipy CoinPointSize cm 0 360 arc fill  
+                       tailx taily CoinPointSize cm 0 360 arc fill} if
    end
 } def
 

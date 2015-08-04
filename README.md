@@ -181,3 +181,7 @@ The values are xmin, ymin, xmax, ymax. I have noticed that you should define
 the values here to be slightly larger than the values that you put into the
 "/bb*" definitions. Not sure why at the moment, but I have a feeling it's
 due to the auto positioning of things. 
+
+##Thanks
+Thanks to R. Lica for the patch to display a kick on the left side for the
+spin parities. 

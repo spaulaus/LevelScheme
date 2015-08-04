@@ -70,13 +70,14 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
 /halffs {fontsize 2 div} def %Changes position of the "-" in the decay superscript
 /nhalffs {fontsize -2.7 div} def %Changes position of "n" on S_n
 /fullfs {fontsize 1 div} def %unused
-/qfs {fontsize 4 div } def %Seems to change position of the labels.
+/qfs {fontsize 4 div} def %Seems to change position of the labels.
 
 /MaxY 0 cm  def    % Y position of the daughter ground state
 /MamaX -1.4 cm def % horizontal position of the mother level
 
 /LevelStart 17.5 def %DO NOT MODIFY
-/LevelEnd bbEnX 0.85 cm mul def   %horizontal length of the level
+/LevelLength bbEnX 0.85 cm mul def   %horizontal length of the level
+/LevelEnd LevelStart LevelLength sub def
 
 %---------- Transition Arrow Positioning ---------
 /ArrowX 70 def       % horiz. position of arrow; initial value
@@ -235,7 +236,7 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
    escale /Elevel exch def   % straight line if down=0 and if possible
    LevelStart Elevel moveto
    isMother 0 eq {
-      LevelEnd dx1 sub dx2 sub Elevel lineto
+      LevelLength dx1 sub dx2 sub Elevel lineto
    } {
       MamaX dx1 sub dx2 sub Elevel lineto
    } ifelse
@@ -243,7 +244,6 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
       Elevel dy down mul sub
       MaxY lt { MaxY Elevel sub } { dy down mul neg } ifelse
       /dE exch def } {
-      % broken level
       MaxY Elevel sub /dE exch def
    } ifelse
 
@@ -254,30 +254,35 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
       0 dx4 sub dE rlineto
       0 dx3 sub 0 rlineto
    } { 100 0 rlineto } ifelse
-   
    stroke
+
    Elevel dE add
    /Elevel exch def
    Elevel dy add
    /MaxY exch def
-   dup stringwidth pop neg LevelEnd add Elevel moveto
+   dup stringwidth pop neg LevelLength add Elevel moveto
 
    %Set the labels for the levels
    0 qfs rmoveto
    /Energy exch def
-   /spn exch def
-   /ft exch def
    /feed exch def
+   /ft exch def
+   /spn exch def
    %Set the Energy labels for the level
    Efont setfont Energy show
-   %Set the ft value
-   -3.4 cm LevelEnd sub 0 rmoveto
+
+   Elevel 0 eq { /Elevel Elevel 2.0 add def} if
+   
+   %Set the feeding value
+   LevelStart dx3 dx4 add sub Elevel dE 0.35 mul add moveto spn
    Ifont setfont spn getnum upshw
-   %Set the feeding
-   0.6 cm 0 rmoveto ft %upshw
+
+   %Set the log(ft)
+   LevelStart -2.5 cm add Elevel moveto ft
    Ifont setfont ft getnum upshw
+
    %Set the spin
-   0.6 cm 0 rmoveto feed %upshw
+   LevelStart -4. cm add Elevel moveto feed
    Ifont setfont feed getnum upshw
 
    0.5 setlinewidth
@@ -367,12 +372,12 @@ momXPos -0.8 cm add momYPos 1.3 cm add 18 /Symbol [(3/2) ( ) ( ) ( ) (-)] supsub
 arStX arStY arEnX arEnY 1.4 7 7 [0 0 0] arrow fill
 
 %---------- Daughter Label ------------
-/dauXPos 0.5 LevelEnd mul def
+/dauXPos 0.5 LevelLength mul def
 /dauYPos -1.5 cm def
 dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
 
 %---------- Energy Label ----------
--2 cm LevelEnd add dauYPos 0.25 cm add moveto (E [keV]) show
+-2 cm LevelLength add dauYPos 0.25 cm add moveto (E [keV]) show
 
 %---------- Q-value  ----------
 /Times findfont 20 scalefont setfont
@@ -410,10 +415,10 @@ dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
 % Font and Size Definitions:
 %-------------------------------------------------------------------------------
 Efont3 setfont
-LevelEnd 0 moveto
+LevelLength 0 moveto
 
 Efont3  setfont  %font for level labels
-LevelEnd 0 moveto
+LevelLength 0 moveto
 Efont setfont
 
 newpath 0 0 moveto
@@ -421,7 +426,7 @@ newpath 0 0 moveto
 dx2 3 div /dx1 exch def
 
 newpath 0 0 moveto
-(5/2-  ) stringwidth pop /dx3 exch def    % energy label width
+((5/2-)) stringwidth pop /dx3 exch def    % energy label width
 dx3 3 div /dx4 exch def
 
 newpath 0 0 moveto
@@ -440,7 +445,7 @@ pop pop pop
 %Spin  log(ft) feeding  Energy(label) Energy(pos) SizeOfKick isDashed isMother
 (5/2-) (5.5) (52(7)) (0.0) 0.0 0 0 0 level
 () () () (195.5)  195.5  0 0 0 level
-(3/2+) (        ) (     ) (237.6)  237.6  0 1 0 level
+((3/2+)) () () (237.6)  237.6  0 1 0 level
 () () () (307.2)  307.2  0 0 0 level
 () () () (449.6)  449.6  0 0 0 level
 () () () (502.2)  502.2  0 0 0 level
@@ -469,7 +474,7 @@ pop pop pop
 % see trans for definition of real arrow width in terms of Intensity
 % headl = length of arrowhead is a global parameter
 
-LevelEnd 0 translate
+LevelLength 0 translate
 90 rotate               %% Now arrows and labels are plotted properly
 %-----------------------------------------------------
 () (  195.5)  195.5  0.0   1   [0 0 (none)] trans

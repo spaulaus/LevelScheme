@@ -64,7 +64,7 @@
 		        %%% achtung!: it is a dividing factor
                         
 % x and y coordinates to start the drawing.
-bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not be changed.
+bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be changed.
 
 5 setmiterlimit  % avoid spikes on end of narrow arrows
 /halffs {fontsize 2 div} def %Changes position of the "-" in the decay superscript
@@ -250,6 +250,9 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
    isMother 0 eq {
       dx1 dE rlineto
       dx2 0 rlineto
+      LevelStart Elevel moveto % left wing [R.Lica]
+      0 dx4 sub dE rlineto
+      0 dx3 sub 0 rlineto
    } { 100 0 rlineto } ifelse
    
    stroke
@@ -268,10 +271,10 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
    %Set the Energy labels for the level
    Efont setfont Energy show
    %Set the ft value
-   -2.5 cm LevelEnd sub 0 rmoveto
+   -3.4 cm LevelEnd sub 0 rmoveto
    Ifont setfont spn getnum upshw
    %Set the feeding
-   0.9 cm 0 rmoveto ft %upshw
+   0.6 cm 0 rmoveto ft %upshw
    Ifont setfont ft getnum upshw
    %Set the spin
    0.6 cm 0 rmoveto feed %upshw
@@ -349,7 +352,7 @@ bbStX 3.5 cm add bbStY 2 cm add translate %The y coordinate should probably not 
 momXPos momYPos 30 /Times-Bold [(Cu) (73) () () ()] supsub
 
 %---------- Mother Spin/Parity ----------
-momXPos momYPos 1.3 cm add 18 /Symbol [(3/2) ( ) ( ) ( ) (-)] supsub
+momXPos -0.8 cm add momYPos 1.3 cm add 18 /Symbol [(3/2) ( ) ( ) ( ) (-)] supsub
 /Times findfont 18 scalefont setfont
 
 %---------- Decay Type Label ----------
@@ -391,20 +394,20 @@ dauXPos dauYPos 30 /Times-Bold [(Zn) (73) () () ()] supsub
 
 %---------- Intensity ----------
 /Times findfont 18 scalefont setfont
--2.5 cm -1 cm moveto (I  %) show %Put the I_beta label
+-3.5 cm -1 cm moveto (I  %) show %Put the I_beta label
 /Symbol findfont 13 scalefont setfont
--2.5 cm -1 cm moveto 5 -3 rmoveto (b) show %Put the beta in the I_beta label
+-3.5 cm -1 cm moveto 5 -3 rmoveto (b) show %Put the beta in the I_beta label
 /Times findfont 18 scalefont setfont
 
 %---------- log(ft) ----------
--0.8 cm -1 cm moveto (log) show %Put the log for log(ft)
+-2.1 cm -1 cm moveto (log) show %Put the log for log(ft)
 /Times-Italic findfont 15 scalefont setfont
-0.2 cm -1 cm moveto (ft) show %Put the ft for log(ft)
+-1.2 cm -1 cm moveto (ft) show %Put the ft for log(ft)
 /Times findfont 18 scalefont setfont
 
 
 %-------------------------------------------------------------------------------
-% FONT DEFINITIONS:
+% Font and Size Definitions:
 %-------------------------------------------------------------------------------
 Efont3 setfont
 LevelEnd 0 moveto
@@ -413,18 +416,18 @@ Efont3  setfont  %font for level labels
 LevelEnd 0 moveto
 Efont setfont
 
-%gsave
 newpath 0 0 moveto
 (8888.8) stringwidth pop /dx2 exch def    % energy label width
 dx2 3 div /dx1 exch def
-%grestore
 
-%gsave
+newpath 0 0 moveto
+(5/2-  ) stringwidth pop /dx3 exch def    % energy label width
+dx3 3 div /dx4 exch def
+
 newpath 0 0 moveto
 (88888.8) true charpath pathbbox
 2 index sub qfs 2 mul add /dy exch def    % Y distance between energy labels
 pop pop pop
-%grestore
 
 /headl 0.20 cm def         % length of arrowhead
 /ht 5. def                 % ht is thickness of arrowhead at its widest part/
@@ -434,10 +437,10 @@ pop pop pop
 %-------------------------------------------------------------------------------
 % LEVELS:
 %-------------------------------------------------------------------------------
-%Spin  log(ft) feeding  Energy(label) Energy(pos) Dunno? isDashed isMother
+%Spin  log(ft) feeding  Energy(label) Energy(pos) SizeOfKick isDashed isMother
 (5/2-) (5.5) (52(7)) (0.0) 0.0 0 0 0 level
 () () () (195.5)  195.5  0 0 0 level
-() () () (237.6)  237.6  0 1 0 level
+(3/2+) (        ) (     ) (237.6)  237.6  0 1 0 level
 () () () (307.2)  307.2  0 0 0 level
 () () () (449.6)  449.6  0 0 0 level
 () () () (502.2)  502.2  0 0 0 level

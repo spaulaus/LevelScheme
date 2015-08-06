@@ -159,8 +159,8 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
    color 2 eq {0. 1. 0. setrgbcolor fill} if
    color 3 eq {0. 0. 1. setrgbcolor fill} if
    
-   dash 0 gt
-   {[10 6] 0 setdash
+   dash 0 ne {
+      [10 6] 0 setdash
       0.4 setlinewidth
       0 0 moveto
       base 0 lineto stroke
@@ -170,17 +170,23 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
       base halfheadthickness lineto
       base 0 lineto
       [] 0 setdash
-      0.5 setlinewidth fill}
-   {0 halfthickness neg moveto
+   }{
+      0 halfthickness neg moveto
       base halfthickness neg lineto
       base halfheadthickness neg lineto
       arrowlength 0 lineto
       base halfheadthickness lineto
       base halfthickness lineto
-      0 halfthickness lineto } ifelse
+      0 halfthickness lineto
+   } ifelse
+   0.5 setlinewidth fill
    closepath
    savematrix setmatrix
       
+%   color 1 eq {1. 0. 0. setrgbcolor fill} if
+%   color 2 eq {0. 1. 0. setrgbcolor fill} if
+%   color 3 eq {0. 0. 1. setrgbcolor fill} if
+
    coinType (up)   eq {tailx taily CoinPointSize cm 0 360 arc fill} if
    coinType (down) eq {tipx tipy CoinPointSize cm 0 360 arc fill} if
    coinType (both) eq {tipx tipy CoinPointSize cm 0 360 arc fill  
@@ -483,7 +489,7 @@ LevelLength 0 translate
 () (  195.5)  195.5  0.0   1   [0 0 (none)] trans
 () (  42.1)   237.6  195.5 1   [1 0 (none)] trans   
 () (  307.2)  307.2  0.0   5.6 [0 0 (none)] trans
-() (  449.6)  449.6  0.0   100 [1 3 (up)] trans 
+() (  449.6)  449.6  0.0   100 [1 1 (up)] trans 
 () (  502.2)  502.2  0.0   17  [0 2 (none)] trans
 () (  674.4)  1124.0 449.2 7   [0 0 (down)] trans
 () (  1559.3) 2008.9 449.2 2   [0 0 (down)] trans

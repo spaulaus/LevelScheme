@@ -49,7 +49,7 @@
 /bbEnX 300 cmConv div def %Adjusts the width of the plot
 /bbEnY 600 cmConv div def %Adjusts the height of the plot
 % x and y coordinates to start the drawing.
-bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be changed.
+bbStX 5.5 cm add bbStY 2 cm add translate %The y coordinate should probably not be changed.
 
 %Set the information for the fonts. 
 /fontsize 13.0 def 
@@ -72,11 +72,11 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
 /qfs {fontsize 4 div} def %Seems to change position of the labels.
 
 /DaugherGsYPos 0 cm  def    % Y position of the daughter ground state
-/MotherX -1.4 cm def % horizontal position of the mother level
+/MotherX -2.5 cm def % horizontal position of the mother level
 
 %---------- Energy Level Information ---------
-/LevelStart 0.5 cm def %Modifies where the levels "start" (Squeeze in X)
-/LevelLength bbEnX 0.85 cm mul def   %horizontal length of the level
+/LevelStart 0.3 cm def %Modifies where the levels "start" (Squeeze in X)
+/LevelLength bbEnX 0.7 cm mul def   %horizontal length of the level
 /LevelEnd LevelStart LevelLength sub def %Defines the end of the energy level
 
 %---------- Transition Arrow Positioning ---------
@@ -276,18 +276,18 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
    %Set the Energy labels for the level
    Efont setfont Energy show
 
-   Elevel 0 eq { /Elevel Elevel 2.0 add def} if
+   /Elevel Elevel 3 add def
    
    %Set the spin for the energy level
-   LevelStart dx3 dx4 add sub Elevel dE 0.35 mul add moveto spn
+   LevelStart dx3 dx4 add sub Elevel moveto spn
    Ifont setfont spn getnum upshw
 
    %Set the log(ft)
-   LevelStart -2.5 cm add Elevel moveto ft
+   LevelStart -3.4 cm add Elevel moveto ft
    Ifont setfont ft getnum upshw
 
    %Set the feeding
-   LevelStart -4. cm add Elevel moveto feed
+   LevelStart -5. cm add Elevel moveto feed
    Ifont setfont feed getnum upshw
 
    0.5 setlinewidth
@@ -404,15 +404,15 @@ ExtraLabelAlign momYPos 50 sub 18 /Times [(P) () () (n) ()] supsub
 
 %---------- Intensity ----------
 /Times findfont 18 scalefont setfont
--4 cm LevelStart add -1 cm moveto (I  %) show %Put the I_beta label
+-5 cm LevelStart add -1 cm moveto (I  %) show %Put the I_beta label
 /Symbol findfont 13 scalefont setfont
--4 cm LevelStart add -1 cm moveto 5 -3 rmoveto (b) show %Put the beta in the I_beta label
+-5 cm LevelStart add -1 cm moveto 5 -3 rmoveto (b) show %Put the beta in the I_beta label
 /Times findfont 18 scalefont setfont
 
 %---------- log(ft) ----------
--2.7 cm LevelStart add -1 cm moveto (log) show %Put the log for log(ft)
+-3.7 cm LevelStart add -1 cm moveto (log) show %Put the log for log(ft)
 /Times-Italic findfont 15 scalefont setfont
--1.8 cm LevelStart add -1 cm moveto (ft) show %Put the ft for log(ft)
+-2.8 cm LevelStart add -1 cm moveto (ft) show %Put the ft for log(ft)
 /Times findfont 18 scalefont setfont
 
 
@@ -431,7 +431,7 @@ newpath 0 0 moveto
 dx2 3 div /dx1 exch def
 
 newpath 0 0 moveto
-((5/2-)) stringwidth pop /dx3 exch def    % energy label width
+((5/2-   )) stringwidth pop /dx3 exch def    % energy label width
 dx3 3 div /dx4 exch def
 
 newpath 0 0 moveto
@@ -452,8 +452,8 @@ pop pop pop
 () () () (195.5)  195.5  0 0 0 level
 ((3/2+)) () () (237.6)  237.6  0 1 0 level
 () () () (307.2)  307.2  0 0 0 level
-() () () (449.6)  449.6  0 0 0 level
-() () () (502.2)  502.2  0 0 0 level
+((11/2-)) () () (449.6)  449.6  0 0 0 level
+((15/2+)) () () (502.2)  502.2  0 0 0 level
 () () () (1124.0) 1124.0 0 0 0 level
 () () () (2008.9) 2008.9 0 0 0 level
 

@@ -183,10 +183,6 @@ bbStX 4 cm add bbStY 2 cm add translate %The y coordinate should probably not be
    closepath
    savematrix setmatrix
       
-%   color 1 eq {1. 0. 0. setrgbcolor fill} if
-%   color 2 eq {0. 1. 0. setrgbcolor fill} if
-%   color 3 eq {0. 0. 1. setrgbcolor fill} if
-
    coinType (up)   eq {tailx taily CoinPointSize cm 0 360 arc fill} if
    coinType (down) eq {tipx tipy CoinPointSize cm 0 360 arc fill} if
    coinType (both) eq {tipx tipy CoinPointSize cm 0 360 arc fill  
@@ -490,7 +486,7 @@ LevelLength 0 translate
 () (  42.1)   237.6  195.5 1   [1 0 (none)] trans   
 () (  307.2)  307.2  0.0   5.6 [0 0 (none)] trans
 () (  449.6)  449.6  0.0   100 [1 1 (up)] trans 
-() (  502.2)  502.2  0.0   17  [0 2 (none)] trans
+() (  502.2)  502.2  0.0   17  [0 2 (both)] trans
 () (  674.4)  1124.0 449.2 7   [0 0 (down)] trans
 () (  1559.3) 2008.9 449.2 2   [0 0 (down)] trans
 %-----------------------------------------------------
